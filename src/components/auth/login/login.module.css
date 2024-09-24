@@ -32,6 +32,7 @@
     color: white;
     border: none;
     border-radius: 5px;
+    width: 100%;
 }
 
 .form button{
@@ -68,4 +69,16 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+}
+
+.inputPassword{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.inputPassword img{
+    width: 25px;
+    height: 25px;
+    margin: -35px;
 }
