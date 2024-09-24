@@ -3,7 +3,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: var(--bgSoft);
-    height: calc(100vh - 14rem);
+    height: var(--vh);
     color: var(--textSoft);
 }
 
@@ -26,14 +26,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    height: 450PX;
 }
 
 .heroSpan{
     text-decoration: underline;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.heroSpan:hover{
+    color: var(--hover);
 }
 
 .img{
     height: 350px;
+}
+
+.button{
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--btn);
+    color: var(--textSoft);
+    border:none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7rem;
+    display: block;
+    cursor: pointer;
+    width: 65%;
+    transition: 0.3s ease-in-out;
+}
+
+.button:hover{
+    background-color:var(--hover);
+    color: var(--btn);
+    font-weight: 800;
 }

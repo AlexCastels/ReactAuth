@@ -8,10 +8,12 @@
 }
 
 :root {
-	--bg: #0d0c22;
+	--bg: #0c2967;
     --bgSoft: #00072a;
     --text: white;
     --textSoft: #e7e7e7;
     --btn: #026ea8;
-	--line: rgb(0, 162, 255)
+	--line: #00a2ff;
+	--hover: #00d3d3;
+	--vh: calc(100vh - 14rem);
 }

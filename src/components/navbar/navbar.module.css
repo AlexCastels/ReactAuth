@@ -43,6 +43,13 @@
     display: block;
     cursor: pointer;
     width: 6rem;
+    transition: 0.3s ease-in-out;
+}
+
+.listEl:hover{
+    background-color:var(--hover);
+    color: var(--btn);
+    font-weight: 700;
 }
 
 .line{
