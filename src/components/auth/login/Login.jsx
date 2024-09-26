@@ -4,8 +4,6 @@ import styles from './login.module.css'
 export function Login(){
 
     const [inputSpia, setInputspia] = useState(true)
-    // let typeInput = 'password'
-    //al click deve cambiare la stringa in text o password
 
     function handleForm(e){
         e.preventDefault()
@@ -13,7 +11,6 @@ export function Login(){
 
     function passwordView(){
         setInputspia(p => !p)
-        console.log(inputSpia);
     }
     
     return (
@@ -28,6 +25,9 @@ export function Login(){
                     <label htmlFor="password">Password: </label>
                     <div className={styles.inputPassword}>
                         <input type={inputSpia ? 'password' : 'text'} name='password' placeholder='Password' required/>
+                        {/* successivamente sarà pure possibile impostare un controllo se l'input è vuoto o meno aggiungendo poi
+                            un value con uno state all'input , successivamete per poi poter mandare i dati
+                        */}
                         <img src={inputSpia ? '/img/not-visible.png' : '/img/visible.png'} alt="visible password icon"  onClick={passwordView}  />                        
                     </div>
                     <div className={styles.inputPassword}>
@@ -39,5 +39,3 @@ export function Login(){
         </div>
     )
 }
-
-//Inserire una condizione per avere la img diversa al click, più ,il cambio di input tra password e text

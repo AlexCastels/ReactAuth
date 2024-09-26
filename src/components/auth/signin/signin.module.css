@@ -2,7 +2,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: var(--vh);
     background-color: var(--bgSoft);
     color: var(--text)
+}
+
+.title{
+    font-size: 2rem;
+    width: 400px;
+    padding: 1rem;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: var(--form);
+    height: 500px;
+    width: 400px;
+    padding: 2.5rem;
+    border-radius: 20px;
+}
+
+.form input{
+    padding: 20px;
+    background-color: var(--input);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.form button{
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--bgSoft);
+    color: var(--textSoft);
+    border:none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7rem;
+    display: block;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.form button:hover{
+    background-color:var(--hover);
+    color: var(--btn);
+    font-weight: 800;
+}
+
+.form input::placeholder{
+    color: rgb(177, 177, 177);
+}
+
+.emailContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.passwordContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.inputPassword{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.inputPassword img{
+    width: 25px;
+    height: 25px;
+    margin: -35px;
+    cursor: pointer;
 }

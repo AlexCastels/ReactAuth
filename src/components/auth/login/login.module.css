@@ -19,7 +19,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 3rem;
-    background-color: var(--btn);
+    background-color: var(--form);
     height: 500px;
     width: 400px;
     padding: 2.5rem;
@@ -28,7 +28,7 @@
 
 .form input{
     padding: 20px;
-    background-color: var(--bg);
+    background-color:var(--input);
     color: white;
     border: none;
     border-radius: 5px;
@@ -56,7 +56,7 @@
 }
 
 .form input::placeholder{
-    color: white;
+    color: rgb(177, 177, 177);
 }
 
 .emailContainer{
