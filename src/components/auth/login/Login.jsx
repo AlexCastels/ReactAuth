@@ -3,7 +3,7 @@ import styles from './login.module.css'
 
 export function Login(){
 
-    const [input, setInput] = useState('password')
+    const [inputSpia, setInputspia] = useState(true)
     // let typeInput = 'password'
     //al click deve cambiare la stringa in text o password
 
@@ -12,7 +12,8 @@ export function Login(){
     }
 
     function passwordView(){
-        setInput('text')
+        setInputspia(p => !p)
+        console.log(inputSpia);
     }
     
     return (
@@ -26,12 +27,11 @@ export function Login(){
                 <div className={styles.passwordContainer}>
                     <label htmlFor="password">Password: </label>
                     <div className={styles.inputPassword}>
-                        <input type={input} name='password' placeholder='Password' required/>
-                        <img src="/img/visible.png" alt="visible password icon" />                        
+                        <input type={inputSpia ? 'password' : 'text'} name='password' placeholder='Password' required/>
+                        <img src={inputSpia ? '/img/not-visible.png' : '/img/visible.png'} alt="visible password icon"  onClick={passwordView}  />                        
                     </div>
                     <div className={styles.inputPassword}>
-                        <input type={input} name='repeatPassword' placeholder='Repeat Password' required/>
-                        <img src="/img/visible.png" alt="visible password icon" onClick={passwordView} />
+                        <input type={'password'} name='repeatPassword' placeholder='Repeat Password' required/>
                     </div>
                 </div>
                 <button>Submit</button>
