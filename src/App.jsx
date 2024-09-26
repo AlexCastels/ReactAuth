@@ -5,6 +5,7 @@ import { Footer } from "./components/footer/Footer";
 import { Explore } from "./components/explore/Explore";
 import { Signin } from "./components/auth/signin/Signin";
 import { Login } from "./components/auth/login/Login";
+import { NotFound } from "./components/not found/NotFound";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path={'/explore'} element={<Explore/>}/>
                     <Route path={'/signin'} element={<Signin/>}/>
                     <Route path={'/login'} element={<Login/>}/>
+                    <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             <Footer/>
         </>
