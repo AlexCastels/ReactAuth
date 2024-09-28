@@ -1,4 +1,4 @@
 export function getMethod(req , res, next){
-    console.log(req.method);
+    console.log(`Richiesta: ${req.method} | URL: ${req.url}`);
     next()
 }

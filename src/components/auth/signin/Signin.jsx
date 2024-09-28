@@ -2,10 +2,36 @@ import { useState } from 'react'
 import styles from './signin.module.css'
 
 export function Signin(){
-    const [inputSpia, setInputspia] = useState(true)
 
-    function handleForm(e){
+    const [inputSpia, setInputspia] = useState(true)
+    const [error , setError] = useState('')
+    
+    async function handleForm(e){
         e.preventDefault()
+        
+        //valori ottenuti nei form
+        const email = e.target.email.value
+        const password = e.target.password.value
+        const repeatPassword = e.target.repeatPassword.value
+        
+        if(password === repeatPassword){
+            console.log(email , password);
+            setError('')
+        } else {
+            setError('Attenzione! Password differente!')
+        }
+
+        try {
+            const res = await fetch('http://localhost:3000/signin' , {
+                method: 'POST',
+                body: JSON.stringify({email , password}),
+                headers: {'Content-Type' : 'application/json'}
+            })
+            const data = await res.json()
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     function passwordView(){
@@ -18,21 +44,36 @@ export function Signin(){
             <form className={styles.form} onSubmit={handleForm}>
                 <div className={styles.emailContainer}>
                     <label htmlFor="email">Email: </label>
-                    <input type="email" name='email' placeholder='Email' required/>
+                    <input 
+                        type="email" 
+                        name='email' 
+                        placeholder='Email' 
+                        required
+                    />
                 </div>
                 <div className={styles.passwordContainer}>
                     <label htmlFor="password">Password: </label>
                     <div className={styles.inputPassword}>
-                        <input type={inputSpia ? 'password' : 'text'} name='password' placeholder='Password' required/>
+                        <input 
+                            type={inputSpia ? 'password' : 'text'} 
+                            name='password' 
+                            placeholder='Password' 
+                            required
+                        />
                         {/* successivamente sarà pure possibile impostare un controllo se l'input è vuoto o meno aggiungendo poi
                             un value con uno state all'input , successivamete per poi poter mandare i dati
                         */}
                         <img src={inputSpia ? '/img/not-visible.png' : '/img/visible.png'} alt="visible password icon"  onClick={passwordView}  />                        
                     </div>
                     <div className={styles.inputPassword}>
-                        <input type={'password'} name='repeatPassword' placeholder='Repeat Password' required/>
+                        <input 
+                            type='password' 
+                            name='repeatPassword' 
+                            placeholder='Repeat Password' 
+                            required/>
                     </div>
                 </div>
+                {error && <p className={styles.error}>{error}</p>}
                 <button>Submit</button>
             </form>
         </div>
