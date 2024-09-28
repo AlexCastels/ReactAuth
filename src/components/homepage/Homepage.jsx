@@ -1,11 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './homepage.module.css'
+import { useEffect } from 'react'
 
 export function Homepage(){
     
     const navigate = useNavigate()
     const handleSignin = () => navigate('/signin')
     const handleExplore = () => navigate('/explore')
+
+    async function getData(){
+        try {
+            const res = await fetch('http://localhost:3000/api/test')
+            const data = await res.json()
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{},[
+        getData()
+    ])
 
     return (
         <div className={styles.generalContainer}>
