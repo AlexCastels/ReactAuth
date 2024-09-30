@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import styles from './signin.module.css'
+import { useNavigate } from 'react-router-dom'
 
 export function Signin(){
 
     const [inputSpia, setInputspia] = useState(true)
     const [error , setError] = useState('')
+    const navigate = useNavigate()
     
     async function handleForm(e){
         e.preventDefault()
@@ -15,22 +17,25 @@ export function Signin(){
         const repeatPassword = e.target.repeatPassword.value
         
         if(password === repeatPassword){
-            console.log(email , password);
             setError('')
+            try {
+                const res = await fetch('http://localhost:3000/signin' , {
+                    method: 'POST',
+                    body: JSON.stringify({email , password}),
+                    headers: {'Content-Type' : 'application/json'}
+                })
+                const data = await res.json()
+                if(data){
+                    setError(data)  
+                }
+                if(data === 'Utente registrato con successo!'){
+                    navigate('/')
+                }
+            } catch (error) {
+                console.log(error);
+            }
         } else {
             setError('Attenzione! Password differente!')
-        }
-
-        try {
-            const res = await fetch('http://localhost:3000/signin' , {
-                method: 'POST',
-                body: JSON.stringify({email , password}),
-                headers: {'Content-Type' : 'application/json'}
-            })
-            const data = await res.json()
-            console.log(data);
-        } catch (error) {
-            console.log(error);
         }
     }
 

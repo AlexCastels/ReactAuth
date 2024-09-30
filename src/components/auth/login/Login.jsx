@@ -1,12 +1,43 @@
 import { useState } from 'react';
 import styles from './login.module.css'
+import { useNavigate } from 'react-router-dom';
 
 export function Login(){
 
     const [inputSpia, setInputspia] = useState(true)
-
-    function handleForm(e){
+    const [error , setError] = useState('')
+    const navigate = useNavigate()
+    
+    async function handleForm(e){
         e.preventDefault()
+        
+        //valori ottenuti nei form
+        const email = e.target.email.value
+        const password = e.target.password.value
+        const repeatPassword = e.target.repeatPassword.value
+        
+        if(password === repeatPassword){
+            setError('')
+            try {
+                const res = await fetch('http://localhost:3000/login' , {
+                    method: 'POST',
+                    body: JSON.stringify({email , password}),
+                    headers: {'Content-Type' : 'application/json'}
+                })
+                const data = await res.json()
+                if(data){
+                    setError(data)  
+                }
+                if(data === 'Utente loggato con successo!'){
+                    navigate('/explore')
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setError('Attenzione! Password differente!')
+        }
+
     }
 
     function passwordView(){
@@ -34,6 +65,7 @@ export function Login(){
                         <input type={'password'} name='repeatPassword' placeholder='Repeat Password' required/>
                     </div>
                 </div>
+                {error && <p className={styles.error}>{error}</p>}
                 <button>Submit</button>
             </form>
         </div>

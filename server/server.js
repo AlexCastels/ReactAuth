@@ -13,7 +13,7 @@ app.use(getMethod)
 
 //route
 app.get('/api/oneUser' , getOneUser)
-app.get('/login' , logIn)
+app.post('/login' , logIn)
 app.post('/signin' , signIn)
 
 //test

@@ -1,21 +1,45 @@
 import db from './database.js' 
 
-export async function logIn(){}
+export async function logIn(req , res){
+    const {email , password} = req.body
+    try {        
+        const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
+        if(!user){
+            res.status(400).json('Attenzione! Utente non esistente.')
+            console.log('Utente non esistente');
+        } else if(user.password !== password){
+            res.status(400).json('Password errata!')
+            console.log('Password errata');
+        } else {
+            res.status(200).json('Utente loggato con successo!')
+            console.log('Utente loggato con successo!');    
+        }
+    } catch (error) {
+        console.log("Problemi con il login dell'utente");
+        res.status(400).json("Problemi con il login dell'utente")
+    }
+}
 
 export async function signIn(req , res){
     const {email , password} = req.body
-    try {
-        const newUser = await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , [email , password])
-        res.status(201).json('Utente registrato con successo: ')
+    try {        
+        const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
+        if(user){
+            res.status(400).json('Attenzione! Utente già esistente.')
+        } else {
+            const newUser = await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , [email , password])
+            console.log('Utente registrato con successo');
+            res.status(201).json('Utente registrato con successo!')    
+        }
     } catch (error) {
         console.log("Problemi con la registrazione dell'utente");
-        res.status(400).json({error : error.message})
+        res.status(400).json({error : "Problemi con la registrazione dell'utente"})
     }
 }
 
 export async function getAllUser(req , res){
     try {
-        const data = await db.many(`SELECT * FROM ReactAuthDB`);
+        const data = await db.many(`SELECT * FROM User`);
         res.status(200).json({data})
     } catch (err) {
         console.error('Errore in getAllUser');
