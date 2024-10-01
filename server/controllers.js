@@ -1,19 +1,21 @@
 import db from './database.js' 
 import { hashPassword } from './models.js';
+import bcrypt from 'bcrypt';
 
 export async function logIn(req , res){
     const {email , password} = req.body
     try {        
         const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
+        const auth = await bcrypt.compare(password , user.password)
         if(!user){
             res.status(400).json('Attenzione! Utente non esistente.')
-            console.log('Utente non esistente');
-        } else if(user.password !== password){
+            return console.log('Utente non esistente');
+        } else if(!auth){
             res.status(400).json('Password errata!')
-            console.log('Password errata');
+            return console.log('Password errata');
         } else {
             res.status(200).json('Utente loggato con successo!')
-            console.log('Utente loggato con successo!');    
+            return console.log('Utente loggato con successo!');    
         }
     } catch (error) {
         console.log("Problemi con il login dell'utente");
