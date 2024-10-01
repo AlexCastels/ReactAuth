@@ -2,8 +2,11 @@ import pgp from 'pg-promise'
 import dotenv from 'dotenv'
 dotenv.config()
 
+// const URI = import.meta.env.VITE_DB_URI
+const URI = process.env.DB_URI
+
 // Configurazione della connessione
-export const db = pgp()('postgres://postgres:admin@localhost:5432/ReactAuthDB')
+export const db = pgp()(URI)
 
 const setupDB = async () => {
     try {

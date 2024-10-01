@@ -1,8 +1,10 @@
 import express from "express";
 import cors from 'cors';
-import { getAllUser, getOneUser, logIn, signIn } from "./controllers.js";
-import { getMethod } from "./middleware.js";
 import db from "./database.js";
+import { getMethod } from "./middleware.js";
+import { getAllUser, getOneUser, logIn, signIn } from "./controllers.js";
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 
@@ -17,9 +19,16 @@ app.post('/login' , logIn)
 app.post('/signin' , signIn)
 
 //test
-app.get('/api/test' , async (req ,res ) => {
-    const users = await db.many(`SELECT * FROM Users`)
-    res.status(200).json(users)
-})
+// app.get('/api/test' , async (req ,res ) => {
+//     res.cookie('test' , true , {httpOnly:true})
+//     console.log('cookie ok');
+//     res.status(200)
+// })
+
+// app.get('/api/testRead' , async (req ,res ) => {
+//     console.log(req.cookies.test);
+//     console.log('cookie letto');
+//     res.status(200)
+// })
 
 app.listen(3000 , () => console.log('server run at http://localhost:3000'))

@@ -1,5 +1,5 @@
 import db from './database.js' 
-import { hashPassword } from './models.js';
+import { createToken, hashPassword, temporaryMemory } from './models.js';
 import bcrypt from 'bcrypt';
 
 export async function logIn(req , res){
@@ -7,6 +7,9 @@ export async function logIn(req , res){
     try {        
         const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
         const auth = await bcrypt.compare(password , user.password)
+        const token = createToken(user.id)
+        temporaryMemory.set(user.id , token)
+        console.log(temporaryMemory);
         if(!user){
             res.status(400).json('Attenzione! Utente non esistente.')
             return console.log('Utente non esistente');
@@ -28,16 +31,19 @@ export async function signIn(req , res){
     try {        
         const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
         if(user){
-            res.status(400).json('Attenzione! Utente già esistente.')
+            return res.status(400).json('Attenzione! Utente già esistente.')
         } else {
             const hashed = await hashPassword(password)
-            const newUser = await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , [email , hashed])
+            const newUser = await db.one(`INSERT INTO Users (email , password) VALUES ($1 , $2) RETURNING id` , [email , hashed])
+            const token = createToken(newUser.id)
+            temporaryMemory.set(newUser.id , token)
+            console.log(temporaryMemory);
             console.log('Utente registrato con successo');
-            res.status(201).json('Utente registrato con successo!')    
+            return res.status(201).json('Utente registrato con successo!') 
         }
     } catch (error) {
         console.log("Problemi con la registrazione dell'utente");
-        res.status(400).json("Problemi con la registrazione dell'utente")
+        return res.status(400).json("Problemi con la registrazione dell'utente")
     }
 }
 

@@ -1,8 +1,11 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+dotenv.config()
 
-const secretKey = import.meta.env.VITE_SECRET_KEY;
-const maxAgeOneDay = 1 * 24 * 60 * 60
+export const temporaryMemory = new Map()
+const secretKey = process.env.SECRET_KEY
+const maxAgeOneDay = 60 * 60 * 24
 
 export async function hashPassword(password){
     try {
@@ -17,3 +20,7 @@ export async function hashPassword(password){
 export function createToken(id){
     return jwt.sign({id} , secretKey , {expiresIn : maxAgeOneDay} )
 }
+
+// export function createCookie(res , token){
+//     return res.cookie('jwt' , token , {httpOnly: true , maxAge: maxAgeOneDay * 1000})
+// }
