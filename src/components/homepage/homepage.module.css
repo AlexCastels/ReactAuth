@@ -1,10 +1,17 @@
-.container{
+.generalContainer{
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: var(--bgSoft);
     height: var(--vh);
     color: var(--textSoft);
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10rem;
 }
 
 .title{
