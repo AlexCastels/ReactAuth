@@ -1,4 +1,8 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken';
+
+const secretKey = import.meta.env.VITE_SECRET_KEY;
+const maxAgeOneDay = 1 * 24 * 60 * 60
 
 export async function hashPassword(password){
     try {
@@ -10,4 +14,6 @@ export async function hashPassword(password){
     }
 }
 
-//hashPassword('ciao12').then(hashed => console.log(hashed))
+export function createToken(id){
+    return jwt.sign({id} , secretKey , {expiresIn : maxAgeOneDay} )
+}
