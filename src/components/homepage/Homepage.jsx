@@ -8,20 +8,6 @@ export function Homepage(){
     const handleSignin = () => navigate('/signin')
     const handleExplore = () => navigate('/explore')
 
-    async function getData(){
-        try {
-            const res = await fetch('http://localhost:3000/api/test')
-            const data = await res.json()
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    useEffect(()=>{},[
-        getData()
-    ])
-
     return (
         <div className={styles.generalContainer}>
             <div className={styles.container}>

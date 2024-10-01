@@ -1,4 +1,5 @@
 import db from './database.js' 
+import { hashPassword } from './models.js';
 
 export async function logIn(req , res){
     const {email , password} = req.body
@@ -27,13 +28,14 @@ export async function signIn(req , res){
         if(user){
             res.status(400).json('Attenzione! Utente già esistente.')
         } else {
-            const newUser = await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , [email , password])
+            const hashed = await hashPassword(password)
+            const newUser = await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , [email , hashed])
             console.log('Utente registrato con successo');
             res.status(201).json('Utente registrato con successo!')    
         }
     } catch (error) {
         console.log("Problemi con la registrazione dell'utente");
-        res.status(400).json({error : "Problemi con la registrazione dell'utente"})
+        res.status(400).json("Problemi con la registrazione dell'utente")
     }
 }
 
