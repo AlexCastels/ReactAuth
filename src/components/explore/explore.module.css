@@ -4,5 +4,6 @@
     align-items: center;
     height: var(--vh);
     background-color: var(--bgSoft);
-    color: var(--text)
+    color: var(--text);
+    gap:3rem;
 }

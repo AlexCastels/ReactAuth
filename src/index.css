@@ -18,4 +18,6 @@
 	--form: #088db5;
 	--input: #00597c;
 	--vh: calc(100vh - 14rem);
+	--gradient: linear-gradient(90deg, rgb(0, 144, 248) 0%, rgb(1, 126, 229) 12%, rgba(0,212,255,1) 100%);
+	--border: #00eaff
 }

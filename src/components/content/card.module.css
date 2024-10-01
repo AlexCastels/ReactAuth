@@ -1,16 +1,30 @@
 .container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     height: 600px;
     width: 400px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 
 .img{
-    width: 400px;
+    width: 350px;
+    align-self: center;
 }
 
 .title{
     font-size: 3rem;
+    background: var(--gradient);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text
+}
+
+.container:hover{
+    transform: scale(1.1);
+    margin:2rem;
 }
 
