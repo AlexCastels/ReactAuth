@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import styles from './signin.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import userStateSlice, { setLogin } from '../../../redux/slice/userStateSlice'
 
 export function Signin(){
 
     const [inputSpia, setInputspia] = useState(true)
     const [error , setError] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
     async function handleForm(e){
         e.preventDefault()
@@ -30,6 +33,10 @@ export function Signin(){
                     setError(data)  
                 }
                 if(data === 'Utente registrato con successo!'){
+                    dispatch(setLogin({
+                        session : true,
+                        userName : email,
+                    }))
                     navigate('/')
                 }
             } catch (error) {

@@ -1,5 +1,5 @@
 import db from './database.js' 
-import { createCookie, createToken, hashPassword, temporaryMemory } from './models.js';
+import { createCookie, createToken, hashPassword} from './models.js';
 import bcrypt from 'bcrypt';
 
 export async function logIn(req , res){
