@@ -16,7 +16,7 @@ export async function logIn(req , res){
             res.status(400).json('Password errata!')
             return console.log('Password errata');
         } else {
-            res.status(200).json({ logged: true, user: req.user })
+            res.status(200).json({ logged: true })
             return console.log('Utente loggato con successo!');    
         }
     } catch (error) {
@@ -36,7 +36,7 @@ export async function signIn(req , res){
             const newUser = await db.one(`INSERT INTO Users (email , password) VALUES ($1 , $2) RETURNING id` , [email , hashed])
             const token = createToken(newUser.id)
             createCookie(res , token)
-            console.log({ logged: true, user: req.user });
+            console.log({ logged: true });
             return res.status(201).json('Utente registrato con successo!') 
         }
     } catch (error) {
@@ -47,7 +47,7 @@ export async function signIn(req , res){
 
 export async function logout(req , res){
     res.cookie('jwt'  , '' , {maxAge : 1})
-    res.status(200).json({ logged: false})
+    res.status(200).json({ logged: false })
     console.log('utente sloggato');
 }
 

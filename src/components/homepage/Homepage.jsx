@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './homepage.module.css'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 export function Homepage(){
     
     const navigate = useNavigate()
     const handleSignin = () => navigate('/signin')
     const handleExplore = () => navigate('/explore')
+    const userState = useSelector(state => state.userState)
+    console.log(userState);
 
     //test
     const handlecookie = async () => await fetch('http://localhost:3000/get-cookie' , {

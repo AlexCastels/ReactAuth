@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
 dotenv.config()
 
-export const temporaryMemory = new Map()
 const secretKey = process.env.SECRET_KEY
 const maxAgeOneDay = 60 * 60 * 24
 

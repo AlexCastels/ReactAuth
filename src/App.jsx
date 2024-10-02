@@ -1,15 +1,17 @@
 import { Route, Routes } from "react-router-dom";
-import { Homepage } from "./components/homepage/Homepage";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import { Navbar } from "./components/navbar/Navbar";
-import { Footer } from "./components/footer/Footer";
+import { Homepage } from "./components/homepage/Homepage";
 import { Explore } from "./components/explore/Explore";
 import { Signin } from "./components/auth/signin/Signin";
 import { Login } from "./components/auth/login/Login";
 import { NotFound } from "./components/not found/NotFound";
+import { Footer } from "./components/footer/Footer";
 
 function App() {
     return (
-        <>
+        <Provider store={store}>
             <Navbar/>
                 <Routes>
                     <Route path={'/'} element={<Homepage/>}/>
@@ -19,7 +21,7 @@ function App() {
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             <Footer/>
-        </>
+        </Provider>
     )
 }
 
