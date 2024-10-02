@@ -21,6 +21,6 @@ export function createToken(id){
     return jwt.sign({id} , secretKey , {expiresIn : maxAgeOneDay} )
 }
 
-// export function createCookie(res , token){
-//     return res.cookie('jwt' , token , {httpOnly: true , maxAge: maxAgeOneDay * 1000})
-// }
+export function createCookie(res , token){
+    return res.cookie('jwt' , token , {httpOnly: true , maxAge: maxAgeOneDay * 1000 , sameSite: 'lax'})
+}

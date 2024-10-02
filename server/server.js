@@ -1,17 +1,22 @@
 import express from "express";
 import cors from 'cors';
+import cookieParser from "cookie-parser";
 import db from "./database.js";
 import { getMethod } from "./middleware.js";
 import { getAllUser, getOneUser, logIn, signIn } from "./controllers.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
-const app = express()
+const app = express();
 
 //middleware
-app.use(express.json())
-app.use(cors())
-app.use(getMethod)
+app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+app.use(getMethod);
+app.use(cookieParser());
 
 //route
 app.get('/api/oneUser' , getOneUser)
@@ -19,6 +24,23 @@ app.post('/login' , logIn)
 app.post('/signin' , signIn)
 
 //test
+app.get('/set-cookie', (req, res) => {
+    res.cookie('jwt', 'cookieValue', { maxAge: 900000, httpOnly: true , sameSite: 'lax'});
+    res.send('Cookie has been set');
+});
+
+app.get('/get-cookie' , (req , res) => {
+    const cookie = req.cookies
+    console.log(cookie);
+    res.status(200)
+})
+
+//come fetchare cookie:
+// const handlecookie = async () => await fetch('http://localhost:3000/get-cookie' , {
+//         method: 'GET',
+//         credentials: 'include'
+//     })
+
 // app.get('/api/test' , async (req ,res ) => {
 //     res.cookie('test' , true , {httpOnly:true})
 //     console.log('cookie ok');

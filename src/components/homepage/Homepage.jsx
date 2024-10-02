@@ -8,6 +8,12 @@ export function Homepage(){
     const handleSignin = () => navigate('/signin')
     const handleExplore = () => navigate('/explore')
 
+    //test
+    const handlecookie = async () => await fetch('http://localhost:3000/get-cookie' , {
+        method: 'GET',
+        credentials: 'include'
+    })
+
     return (
         <div className={styles.generalContainer}>
             <div className={styles.container}>
@@ -20,6 +26,7 @@ export function Homepage(){
                     <img className={styles.img} src="/img/jwt-logo.png" alt="jwt-logo"/>
                     <p>Non sei ancora iscritto? <span className={styles.heroSpan} onClick={handleSignin}>Sign In</span></p>
                 </div>
+                <button onClick={handlecookie}>cookie</button>
             </div>
         </div>
     )

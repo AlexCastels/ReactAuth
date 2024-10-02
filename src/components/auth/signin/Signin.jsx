@@ -21,6 +21,7 @@ export function Signin(){
             try {
                 const res = await fetch('http://localhost:3000/signin' , {
                     method: 'POST',
+                    credentials: 'include',
                     body: JSON.stringify({email , password}),
                     headers: {'Content-Type' : 'application/json'}
                 })

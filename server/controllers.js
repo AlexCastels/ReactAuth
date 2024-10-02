@@ -1,5 +1,5 @@
 import db from './database.js' 
-import { createToken, hashPassword, temporaryMemory } from './models.js';
+import { createCookie, createToken, hashPassword, temporaryMemory } from './models.js';
 import bcrypt from 'bcrypt';
 
 export async function logIn(req , res){
@@ -8,8 +8,7 @@ export async function logIn(req , res){
         const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
         const auth = await bcrypt.compare(password , user.password)
         const token = createToken(user.id)
-        temporaryMemory.set(user.id , token)
-        console.log(temporaryMemory);
+        createCookie(res , token)
         if(!user){
             res.status(400).json('Attenzione! Utente non esistente.')
             return console.log('Utente non esistente');
@@ -36,8 +35,7 @@ export async function signIn(req , res){
             const hashed = await hashPassword(password)
             const newUser = await db.one(`INSERT INTO Users (email , password) VALUES ($1 , $2) RETURNING id` , [email , hashed])
             const token = createToken(newUser.id)
-            temporaryMemory.set(newUser.id , token)
-            console.log(temporaryMemory);
+            createCookie(res , token)
             console.log('Utente registrato con successo');
             return res.status(201).json('Utente registrato con successo!') 
         }
