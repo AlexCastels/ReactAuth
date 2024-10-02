@@ -16,7 +16,7 @@ export async function logIn(req , res){
             res.status(400).json('Password errata!')
             return console.log('Password errata');
         } else {
-            res.status(200).json('Utente loggato con successo!')
+            res.status(200).json({ logged: true, user: req.user })
             return console.log('Utente loggato con successo!');    
         }
     } catch (error) {
@@ -36,13 +36,19 @@ export async function signIn(req , res){
             const newUser = await db.one(`INSERT INTO Users (email , password) VALUES ($1 , $2) RETURNING id` , [email , hashed])
             const token = createToken(newUser.id)
             createCookie(res , token)
-            console.log('Utente registrato con successo');
+            console.log({ logged: true, user: req.user });
             return res.status(201).json('Utente registrato con successo!') 
         }
     } catch (error) {
         console.log("Problemi con la registrazione dell'utente");
         return res.status(400).json("Problemi con la registrazione dell'utente")
     }
+}
+
+export async function logout(req , res){
+    res.cookie('jwt'  , '' , {maxAge : 1})
+    res.status(200).json({ logged: false})
+    console.log('utente sloggato');
 }
 
 export async function getAllUser(req , res){
@@ -64,5 +70,3 @@ export async function getOneUser(req, res , id){
         throw new Error({message : 'Utente non trovato'})
     }
 }
-
-export async function postUser(){}

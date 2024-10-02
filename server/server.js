@@ -1,9 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import db from "./database.js";
-import { getMethod } from "./middleware.js";
-import { getAllUser, getOneUser, logIn, signIn } from "./controllers.js";
+import { checkUser, getMethod } from "./middleware.js";
+import { getAllUser, getOneUser, logIn, logout, signIn } from "./controllers.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -19,9 +18,12 @@ app.use(getMethod);
 app.use(cookieParser());
 
 //route
-app.get('/api/oneUser' , getOneUser)
+app.get('*' , checkUser)
 app.post('/login' , logIn)
 app.post('/signin' , signIn)
+app.get('logout' , logout)
+app.get('/api/oneUser' , getOneUser)
+app.get('api/allUser' , getAllUser)
 
 //test
 app.get('/set-cookie', (req, res) => {
