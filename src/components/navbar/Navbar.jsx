@@ -9,9 +9,20 @@ export function Navbar(){
     const navigate = useNavigate()
     const handleLogin = () => navigate('/login')
     const handleSignin = () => navigate('/signin')
-    const handleLogout = () => dispatch(setLogout())
     const userState = useSelector(state => state.userState)
     
+    async function handleLogout(){
+        dispatch(setLogout())
+        try {
+            const res = await fetch('http://localhost:3000/logout' ,{
+                method : 'POST',
+                credentials: 'include'
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
     return (
         <nav className={styles.container}>
             <div className={styles.navbar}>

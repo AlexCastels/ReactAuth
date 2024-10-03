@@ -21,5 +21,5 @@ export function createToken(id){
 }
 
 export function createCookie(res , token){
-    return res.cookie('jwt' , token , {httpOnly: true , maxAge: maxAgeOneDay * 1000 , sameSite: 'lax'})
+    return res.cookie('jwt' , token , {httpOnly: true , maxAge: maxAgeOneDay * 1000 , sameSite: 'lax' , path:'/'})
 }

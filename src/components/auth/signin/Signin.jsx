@@ -13,6 +13,7 @@ export function Signin(){
     
     async function handleForm(e){
         e.preventDefault()
+        setError('')
         
         //valori ottenuti nei form
         const email = e.target.email.value
@@ -20,7 +21,6 @@ export function Signin(){
         const repeatPassword = e.target.repeatPassword.value
         
         if(password === repeatPassword){
-            setError('')
             try {
                 const res = await fetch('http://localhost:3000/signin' , {
                     method: 'POST',
@@ -32,11 +32,8 @@ export function Signin(){
                 if(data){
                     setError(data)  
                 }
-                if(data === 'Utente registrato con successo!'){
-                    dispatch(setLogin({
-                        session : true,
-                        userName : email,
-                    }))
+                if(data.session === true){
+                    dispatch(setLogin(data))
                     navigate('/')
                 }
             } catch (error) {

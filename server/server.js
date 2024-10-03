@@ -21,9 +21,9 @@ app.use(cookieParser());
 app.get('*' , checkUser)
 app.post('/login' , logIn)
 app.post('/signin' , signIn)
-app.get('logout' , logout)
+app.post('/logout' , logout)
 app.get('/api/oneUser' , getOneUser)
-app.get('api/allUser' , getAllUser)
+app.get('/api/allUser' , getAllUser)
 
 //test
 app.get('/set-cookie', (req, res) => {

@@ -10,14 +10,14 @@ export async function logIn(req , res){
         const token = createToken(user.id)
         createCookie(res , token)
         if(!user){
-            res.status(400).json('Attenzione! Utente non esistente.')
-            return console.log('Utente non esistente');
+            console.log('Utente non esistente');
+            return res.status(400).json('Attenzione! Utente non esistente.')
         } else if(!auth){
-            res.status(400).json('Password errata!')
-            return console.log('Password errata');
+            console.log('Password errata');
+            return res.status(400).json('Password errata!')
         } else {
-            res.status(200).json({ logged: true })
-            return console.log('Utente loggato con successo!');    
+            console.log('Utente loggato con successo!');    
+            return res.status(200).json({ session: true , userName: email})
         }
     } catch (error) {
         console.log("Problemi con il login dell'utente");
@@ -36,8 +36,8 @@ export async function signIn(req , res){
             const newUser = await db.one(`INSERT INTO Users (email , password) VALUES ($1 , $2) RETURNING id` , [email , hashed])
             const token = createToken(newUser.id)
             createCookie(res , token)
-            console.log({ logged: true });
-            return res.status(201).json('Utente registrato con successo!') 
+            console.log({ session: true , userName: email});
+            return res.status(201).json({ session: true , userName: email}) 
         }
     } catch (error) {
         console.log("Problemi con la registrazione dell'utente");
@@ -46,8 +46,8 @@ export async function signIn(req , res){
 }
 
 export async function logout(req , res){
-    res.cookie('jwt'  , '' , {maxAge : 1})
-    res.status(200).json({ logged: false })
+    res.clearCookie('jwt' ,{path : '/'})
+    res.status(200).json({ session: false , userName : ''})
     console.log('utente sloggato');
 }
 

@@ -7,15 +7,8 @@ export function Homepage(){
     const navigate = useNavigate()
     const handleSignin = () => navigate('/signin')
     const handleExplore = () => navigate('/explore')
-    const userState = useSelector(state => state.userState)
-    console.log(userState);
-
-    //test
-    const handlecookie = async () => await fetch('http://localhost:3000/get-cookie' , {
-        method: 'GET',
-        credentials: 'include'
-    })
-
+    const userState = useSelector(state => state.userState.session)
+    
     return (
         <div className={styles.generalContainer}>
             <div className={styles.container}>
@@ -26,9 +19,12 @@ export function Homepage(){
                 </div>
                 <div className={styles.hero}>
                     <img className={styles.img} src="/img/jwt-logo.png" alt="jwt-logo"/>
-                    <p>Non sei ancora iscritto? <span className={styles.heroSpan} onClick={handleSignin}>Sign In</span></p>
+                    {userState ? 
+                        <p>Esplora tutte le novità sul nostro sito!</p> 
+                            : 
+                        <p>Non sei ancora iscritto? <span className={styles.heroSpan} onClick={handleSignin}>Sign In</span></p>
+                    }
                 </div>
-                <button onClick={handlecookie}>cookie</button>
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import { Signin } from "./components/auth/signin/Signin";
 import { Login } from "./components/auth/login/Login";
 import { NotFound } from "./components/not found/NotFound";
 import { Footer } from "./components/footer/Footer";
+import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
             <Navbar/>
                 <Routes>
                     <Route path={'/'} element={<Homepage/>}/>
-                    <Route path={'/explore'} element={<Explore/>}/>
+                    <Route path={'/explore'} element={<PrivateRoute><Explore/></PrivateRoute>}/>
                     <Route path={'/signin'} element={<Signin/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'*'} element={<NotFound/>}/>

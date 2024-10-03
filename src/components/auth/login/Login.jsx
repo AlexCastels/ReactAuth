@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import styles from './login.module.css'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../../redux/slice/userStateSlice';
 
 export function Login(){
 
     const [inputSpia, setInputspia] = useState(true)
     const [error , setError] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
     async function handleForm(e){
         e.preventDefault()
+        setError('')
         
         //valori ottenuti nei form
         const email = e.target.email.value
@@ -17,10 +21,10 @@ export function Login(){
         const repeatPassword = e.target.repeatPassword.value
         
         if(password === repeatPassword){
-            setError('')
             try {
                 const res = await fetch('http://localhost:3000/login' , {
                     method: 'POST',
+                    credentials: 'include',
                     body: JSON.stringify({email , password}),
                     headers: {'Content-Type' : 'application/json'}
                 })
@@ -28,7 +32,8 @@ export function Login(){
                 if(data){
                     setError(data)  
                 }
-                if(data === 'Utente loggato con successo!'){
+                if(data.session === true){
+                    dispatch(setLogin(data))
                     navigate('/explore')
                 }
             } catch (error) {
