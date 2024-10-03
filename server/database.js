@@ -15,10 +15,11 @@ const setupDB = async () => {
             CREATE TABLE Users(
                 id SERIAL NOT NULL PRIMARY KEY,
                 email TEXT NOT NULL,
-                password TEXT NOT NULL
+                password TEXT NOT NULL,
+                isAdmin BOOLEAN
             );
         `)
-        await db.none(`INSERT INTO Users (email , password) VALUES ($1 , $2)` , ['alex@gmail.it' , 'pass12'])
+        await db.none(`INSERT INTO Users (email , password , isAdmin) VALUES ($1 , $2, $3)` , ['admin@admin.it' , '$2b$10$9C/HnByWm92eAgWtWeiOKe.DS1uWtkDWwo82bmAH7U34nMKB6jXj6' , true])
         console.log('Tabella creata e dati inseriti');       
     } catch (error) {
     console.log('Errore nel creazione della tabella' , error); 

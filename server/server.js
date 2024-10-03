@@ -37,22 +37,11 @@ app.get('/get-cookie' , (req , res) => {
     res.status(200)
 })
 
-//come fetchare cookie:
+//FETCHARE COOKIES SU PORTE DIVERSE
 // const handlecookie = async () => await fetch('http://localhost:3000/get-cookie' , {
 //         method: 'GET',
 //         credentials: 'include'
 //     })
 
-// app.get('/api/test' , async (req ,res ) => {
-//     res.cookie('test' , true , {httpOnly:true})
-//     console.log('cookie ok');
-//     res.status(200)
-// })
-
-// app.get('/api/testRead' , async (req ,res ) => {
-//     console.log(req.cookies.test);
-//     console.log('cookie letto');
-//     res.status(200)
-// })
 
 app.listen(3000 , () => console.log('server run at http://localhost:3000'))

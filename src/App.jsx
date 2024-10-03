@@ -6,6 +6,7 @@ import { Homepage } from "./components/homepage/Homepage";
 import { Explore } from "./components/explore/Explore";
 import { Signin } from "./components/auth/signin/Signin";
 import { Login } from "./components/auth/login/Login";
+import {Admin } from "./components/admin/Admin"
 import { NotFound } from "./components/not found/NotFound";
 import { Footer } from "./components/footer/Footer";
 import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
@@ -19,6 +20,7 @@ function App() {
                     <Route path={'/explore'} element={<PrivateRoute><Explore/></PrivateRoute>}/>
                     <Route path={'/signin'} element={<Signin/>}/>
                     <Route path={'/login'} element={<Login/>}/>
+                    <Route path={'/admin'} element={<Admin/>}/>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             <Footer/>

@@ -32,9 +32,14 @@ export function Login(){
                 if(data){
                     setError(data)  
                 }
-                if(data.session === true){
+                if(data.isAdmin === true){
+                    dispatch(setLogin(data))
+                    navigate('/admin')
+                }
+                if(data.session === true && data.isAdmin === false){
                     dispatch(setLogin(data))
                     navigate('/explore')
+                    console.log(data);
                 }
             } catch (error) {
                 console.log(error);

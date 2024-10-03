@@ -28,3 +28,7 @@ export function checkUser(req , res , next){
         next()
     }
 }
+
+export function checkAdmin(req , res ,next){
+    const isAdmin = req.body.isAdmin
+}
