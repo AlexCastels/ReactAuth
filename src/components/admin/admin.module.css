@@ -1,0 +1,110 @@
+.generalContainer{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+    background-color: var(--bgSoft);
+    height: var(--vh);
+    color: var(--textSoft);
+}
+
+.title{
+    padding-left:10%;
+    font-size: xx-large;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 7rem;
+}
+
+.subTitle{
+    font-size: x-large;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+.line{
+    background-color: var(--line);
+    height: 1px;
+    margin: 2px 0rem 2rem;
+    border-radius: 25px;
+}
+
+.userDetailContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    /* border: 1px solid red; */
+}
+
+.userContainer{
+    display: flex;
+    flex-direction: column;
+    height: 25rem;
+    gap: 20px;
+    overflow-y: scroll;
+}
+
+.userContainer::-webkit-scrollbar {
+    width: 0.5rem;              
+}
+
+.userContainer::-webkit-scrollbar-thumb {
+    background-color: var(--line);  
+    border-radius: 10px;       
+    border: 3px solid var(--line);  
+}
+
+.detailContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35rem;
+    gap: 50px;
+}
+
+.detailContainer div{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detailContainer img{
+    width: 2rem;
+    border-radius: 50%;
+}
+
+.detailContainer button{
+    padding: 0.5rem;
+    margin: 1rem;
+    border-radius: 5px;
+    background: rgb(164, 1, 1);
+    color: var(--textSoft);
+    border:none;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    width: 7rem;
+    transition: 0.3s ease-in-out;
+}
+
+.detailContainer button:hover{
+    background-color:rgb(255, 70, 70);
+    color: white;
+    font-weight: 700;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.detailForm{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
