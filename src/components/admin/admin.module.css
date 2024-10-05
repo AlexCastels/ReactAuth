@@ -1,7 +1,4 @@
 .generalContainer{
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-between; */
     background-color: var(--bgSoft);
     height: var(--vh);
     color: var(--textSoft);
@@ -12,30 +9,33 @@
     font-size: xx-large;
 }
 
+/* container generale del form e dei dettagli */
 .container{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 7rem;
+    /* align-items: center; */
+    justify-content: space-evenly;
+    margin-top: 4rem;
 }
 
 .subTitle{
     font-size: x-large;
     letter-spacing: 1px;
-    margin-bottom: 2rem;
 }
 
 .line{
     background-color: var(--line);
     height: 1px;
-    margin: 2px 0rem 2rem;
+    margin: 2rem 0rem 2rem;
     border-radius: 25px;
 }
 
+/* container dettagli users */
 .userDetailContainer{
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content: center;
+    height: 35rem;
+    /* justify-content:space-around; */
     /* border: 1px solid red; */
 }
 
@@ -45,6 +45,7 @@
     height: 25rem;
     gap: 20px;
     overflow-y: scroll;
+    /* border: 1px solid red; */
 }
 
 .userContainer::-webkit-scrollbar {
@@ -93,18 +94,83 @@
 
 .detailContainer button:hover{
     background-color:rgb(255, 70, 70);
-    color: white;
-    font-weight: 700;
 }
 
 .formContainer{
     display: flex;
     flex-direction: column;
+    gap: 3rem;
+    /* justify-content: space-between; */
+    height: 35rem;
 }
 
-.detailForm{
+.form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--form);
+    height: 25rem;
+    width: 25rem;
+    padding: 2.5rem;
+    border-radius: 20px;
+    font-size: 1.1rem;
+}
+
+.form div:nth-child(1){
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
 }
 
+.form div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form div:nth-child(3){
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input{
+    padding: 20px;
+    background-color:var(--input);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 2rem;
+}
+
+.checkbox{
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.form button{
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--bgSoft);
+    color: var(--textSoft);
+    border:none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7rem;
+    display: block;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.form button:hover{
+    background-color:var(--hover);
+    color: var(--btn);
+    font-weight: 800;
+}
+
+.form input::placeholder{
+    color: rgb(177, 177, 177);
+}

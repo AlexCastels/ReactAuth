@@ -51,18 +51,18 @@ export function Admin(){
                 </div>
                 <div className={styles.formContainer}>
                     <p className={styles.subTitle}>Add new user</p>
-                    <form onSubmit={handleUser} className={styles.detailForm}>
-                            <label htmlFor="email">email :</label>
+                    <form onSubmit={handleUser} className={styles.form}>
                         <div>
-                            <input type="text" name="email"/>
+                            <label htmlFor="email">Email</label>
+                            <input type="text" className={styles.input} name="email"/>
                         </div>
-                            <label htmlFor="password">password :</label>
                         <div>
-                            <input type="password" name="password"/>
+                            <label htmlFor="password">Password</label>
+                            <input type="password" className={styles.input} name="password"/>
                         </div>
                         <div>
                             <label htmlFor="isAdmin">E' un admin?</label>
-                            <input type="checkbox" name="isAdmin"/>
+                            <input type="checkbox" className={styles.checkbox} name="isAdmin"/>
                         </div>
                         <button>Invia</button>
                     </form>
