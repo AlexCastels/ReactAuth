@@ -78,3 +78,15 @@ export async function getOneUser(req, res , id){
         throw new Error({message : 'Utente non trovato'})
     }
 }
+
+export async function deleteUser(req, res){
+    const {id} = req.body
+    try {
+        const data = await db.none(`DELETE FROM Users WHERE id=$1` , id)
+        console.log('Utente cancellato');
+        res.status(200).json('Utente cancellato con successo')
+    } catch (error) {
+        console.log('Problemi con la cancellazione');
+        res.status(400).json('Problemi con la cancellazione')
+    }
+}

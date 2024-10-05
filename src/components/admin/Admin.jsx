@@ -24,6 +24,20 @@ export function Admin(){
         e.preventDefault()
     }
 
+    async function handleDelete(id){
+        try {
+            const res = await fetch('http://localhost:3000/api/delete' , {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify({id})
+            })
+            getAllUser()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className={styles.generalContainer}>
             <div>
@@ -42,7 +56,7 @@ export function Admin(){
                                         <p>id: {user.id}</p>
                                         <p>email: {user.email}</p>
                                     </div>
-                                    <button>Delete</button>
+                                    <button onClick={() => handleDelete(user.id)}>Delete</button>
                                 </div>
                             )
                         })}
