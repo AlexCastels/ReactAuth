@@ -90,3 +90,22 @@ export async function deleteUser(req, res){
         res.status(400).json('Problemi con la cancellazione')
     }
 }
+
+export async function addUserByAdmin(req , res){
+    const {email , password , isAdmin} = req.body
+    try {        
+        const user = await db.oneOrNone(`SELECT * FROM Users WHERE email=$1` , email)
+        if(user){
+            console.log('Utente già esistente');
+            return res.status(400).json('Attenzione! Utente già esistente.')
+        } else {
+            const hashed = await hashPassword(password)
+            const newUser = await db.one(`INSERT INTO Users (email , password, isAdmin) VALUES ($1 , $2, $3) RETURNING id` , [email , hashed , isAdmin])
+            console.log(newUser);
+            return res.status(201).json('Nuovo utente registrato con successo!') 
+        }
+    } catch (error) {
+        console.log("Problemi con la registrazione dell'utente");
+        return res.status(400).json("Problemi con la registrazione dell'utente")
+    }
+}

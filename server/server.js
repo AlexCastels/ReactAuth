@@ -2,7 +2,7 @@ import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { checkUser, getMethod } from "./middleware.js";
-import { deleteUser, getAllUser, getOneUser, logIn, logout, signIn } from "./controllers.js";
+import { addUserByAdmin, deleteUser, getAllUser, getOneUser, logIn, logout, signIn } from "./controllers.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -24,7 +24,7 @@ app.post('/signin' , signIn)
 app.post('/logout' , logout)
 app.get('/api/oneUser' , getOneUser)
 app.get('/api/allUser' , getAllUser)
-
+app.post('/api/addUser' , addUserByAdmin)
 app.delete('/api/delete' , deleteUser)
 
 //test
