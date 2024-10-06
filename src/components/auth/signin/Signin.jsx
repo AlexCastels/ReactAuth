@@ -70,9 +70,6 @@ export function Signin(){
                             placeholder='Password' 
                             required
                         />
-                        {/* successivamente sarà pure possibile impostare un controllo se l'input è vuoto o meno aggiungendo poi
-                            un value con uno state all'input , successivamete per poi poter mandare i dati
-                        */}
                         <img src={inputSpia ? '/img/not-visible.png' : '/img/visible.png'} alt="visible password icon"  onClick={passwordView}  />                        
                     </div>
                     <div className={styles.inputPassword}>

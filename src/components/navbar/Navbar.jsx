@@ -9,6 +9,7 @@ export function Navbar(){
     const navigate = useNavigate()
     const handleLogin = () => navigate('/login')
     const handleSignin = () => navigate('/signin')
+    const handleAdmin = () => navigate('/admin')
     const userState = useSelector(state => state.userState)
     
     async function handleLogout(){
@@ -30,6 +31,7 @@ export function Navbar(){
                 <div className={styles.logContainer}>
                     {userState.userName && <p>Benvenuto {userState.userName}</p>}
                     <ul className={styles.list}>
+                        {userState.isAdmin && <li><button className={styles.listEl} onClick={handleAdmin}>Admin</button></li>}
                         {userState.session ? (
                                 <li><button className={styles.listEl} onClick={handleLogout}>Log out</button></li> 
                             ) : (

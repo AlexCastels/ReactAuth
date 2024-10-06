@@ -34,9 +34,9 @@ export function Login(){
                 }
                 if(data.isAdmin === true){
                     dispatch(setLogin(data))
+                    console.log(data);
                     navigate('/admin')
-                }
-                if(data.session === true && data.isAdmin === false){
+                } else if(data.session === true && data.isAdmin === false){
                     dispatch(setLogin(data))
                     navigate('/explore')
                     console.log(data);
@@ -66,9 +66,6 @@ export function Login(){
                     <label htmlFor="password">Password: </label>
                     <div className={styles.inputPassword}>
                         <input type={inputSpia ? 'password' : 'text'} name='password' placeholder='Password' required/>
-                        {/* successivamente sarà pure possibile impostare un controllo se l'input è vuoto o meno aggiungendo poi
-                            un value con uno state all'input , successivamete per poi poter mandare i dati
-                        */}
                         <img src={inputSpia ? '/img/not-visible.png' : '/img/visible.png'} alt="visible password icon"  onClick={passwordView}  />                        
                     </div>
                     <div className={styles.inputPassword}>

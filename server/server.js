@@ -14,11 +14,11 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
-app.use(getMethod);
 app.use(cookieParser());
+app.use(getMethod);
+app.use(checkUser)
 
 //route
-app.get('*' , checkUser)
 app.post('/login' , logIn)
 app.post('/signin' , signIn)
 app.post('/logout' , logout)

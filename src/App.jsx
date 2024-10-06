@@ -10,6 +10,7 @@ import {Admin } from "./components/admin/Admin"
 import { NotFound } from "./components/not found/NotFound";
 import { Footer } from "./components/footer/Footer";
 import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
+import { AdminPrivateRoute } from "./components/privateRoute/AdminPrivateRoute";
 
 function App() {
     return (
@@ -20,7 +21,7 @@ function App() {
                     <Route path={'/explore'} element={<PrivateRoute><Explore/></PrivateRoute>}/>
                     <Route path={'/signin'} element={<Signin/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/admin'} element={<Admin/>}/>
+                    <Route path={'/admin'} element={<AdminPrivateRoute><Admin/></AdminPrivateRoute>}/>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             <Footer/>

@@ -14,13 +14,23 @@ export function checkUser(req , res , next){
         jwt.verify(token , secretKey , async (err , decodedToken) => {
             if(err){
                 console.log(err.message);
-                res.locals.user = null
-                next()
+                res.locals.user = null;
+                console.log('Token non valido');
+                return res.status(401).json('Token non valido o scaduto')
             } else {
-                console.log(decodedToken);
-                let user = await db.oneOrNone(`SELECT * FROM Users WHERE id=$1` , decodedToken.id)
-                res.locals.user = user
-                next()
+                try {
+                    console.log(decodedToken);
+                    let user = await db.oneOrNone(`SELECT * FROM Users WHERE id=$1` , decodedToken.id)
+                    if(user){
+                        res.locals.user = user
+                        next()
+                    } else {
+                        return res.status(401).json('Utente non trovato');
+                    }
+                } catch (error) {
+                    console.log(error);
+                    return res.status(500).json('Errore del server');
+                }
             }
         })
     } else {
@@ -29,6 +39,6 @@ export function checkUser(req , res , next){
     }
 }
 
-export function checkAdmin(req , res ,next){
-    const isAdmin = req.body.isAdmin
-}
+// export function checkAdmin(req , res ,next){
+//     const isAdmin = req.body.isAdmin
+// }

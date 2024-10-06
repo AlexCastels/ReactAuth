@@ -9,9 +9,9 @@ export async function logIn(req , res){
         const auth = await bcrypt.compare(password , user.password)
         const token = createToken(user.id)
         createCookie(res , token)
-        const isAdmin = user.isAdmin
+        const isAdmin = user.isadmin
         console.log(user);
-        if(user.isadmin === true){
+        if(isAdmin === true){
             console.log('Admin loggato con successo!');    
             return res.status(200).json({ session: true , userName: email , isAdmin : true})
         }
@@ -61,7 +61,6 @@ export async function getAllUser(req , res){
     try {
         const data = await db.many(`SELECT * FROM Users`);
         console.log('Utenti recuperati');
-        console.log(data);
         res.status(200).json(data)
     } catch (err) {
         console.error('Errore in getAllUser');

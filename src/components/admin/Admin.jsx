@@ -6,7 +6,6 @@ export function Admin(){
     const [users , setUsers] = useState([])
     const [isAdmin , setIsAdmin] = useState(false)
     const [error , setError] = useState('')
-    const [adminControl , setAdminControl] = useState('')
 
     async function getAllUser(){
         try {
