@@ -11,6 +11,7 @@ import { NotFound } from "./components/not found/NotFound";
 import { Footer } from "./components/footer/Footer";
 import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 import { AdminPrivateRoute } from "./components/privateRoute/AdminPrivateRoute";
+import { Redirect } from "./components/redirect/Redirect";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path={'/signin'} element={<Signin/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/admin'} element={<AdminPrivateRoute><Admin/></AdminPrivateRoute>}/>
+                    <Route path={'/redirect'} element={<Redirect/>}/>
                     <Route path={'*'} element={<NotFound/>}/>
                 </Routes>
             <Footer/>

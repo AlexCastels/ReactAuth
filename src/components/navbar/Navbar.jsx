@@ -19,6 +19,7 @@ export function Navbar(){
                 method : 'POST',
                 credentials: 'include'
             })
+            navigate('/')
         } catch (error) {
             console.log(error.message);
         }
