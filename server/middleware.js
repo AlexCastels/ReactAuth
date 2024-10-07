@@ -19,9 +19,9 @@ export function checkUser(req , res , next){
                 return res.status(401).json('Token non valido o scaduto')
             } else {
                 try {
-                    console.log(decodedToken);
                     let user = await db.oneOrNone(`SELECT * FROM Users WHERE id=$1` , decodedToken.id)
                     if(user){
+                        console.log(decodedToken);
                         res.locals.user = user
                         next()
                     } else {

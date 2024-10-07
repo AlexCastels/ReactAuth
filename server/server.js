@@ -1,7 +1,7 @@
 import express from "express";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import { checkUser, getMethod } from "./middleware.js";
+import { getMethod } from "./middleware.js";
 import { addUserByAdmin, deleteUser, getAllUser, getOneUser, logIn, logout, signIn } from "./controllers.js";
 import dotenv from 'dotenv'
 dotenv.config()
@@ -16,7 +16,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(getMethod);
-app.use(checkUser)
+//app.use(checkUser)
 
 //route
 app.post('/login' , logIn)

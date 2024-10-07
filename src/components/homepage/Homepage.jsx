@@ -18,7 +18,7 @@ export function Homepage(){
                     <button className={styles.button} onClick={handleExplore}>Explore</button>   
                 </div>
                 <div className={styles.hero}>
-                    <img className={styles.img} src="/img/jwt-logo.png" alt="jwt-logo"/>
+                    <img className={styles.img} src="/img/jwt.png" alt="jwt-logo"/>
                     {userState ? 
                         <p>Esplora tutte le novità sul nostro sito!</p> 
                             : 

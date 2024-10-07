@@ -27,7 +27,7 @@ export async function logIn(req , res){
         }
     } catch (error) {
         console.log("Problemi con il login dell'utente");
-        res.status(400).json("Problemi con il login dell'utente")
+        res.status(400).json("Attenzione Email o Password errate!")
     }
 }
 

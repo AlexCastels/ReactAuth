@@ -6,7 +6,7 @@ export function Footer(){
             <div className={styles.line}></div>
             <div className={styles.text}>
                 <p>Testing sull'implementazione delle funzioni di JWT</p>
-                <p>Alessandro Francesco Castelli</p>
+                <p>© Alessandro Francesco Castelli</p>
             </div>
         </div>
     )
